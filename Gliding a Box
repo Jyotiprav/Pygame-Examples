@@ -1,0 +1,47 @@
+import pygame
+
+pygame.init()
+
+Black=(0,0,0)
+White=(255,255,255)
+size =[700,500]
+screen = pygame.display.set_mode(size)
+
+pygame.display.set_caption("Bouncing Rectangle")
+
+done=False
+
+clock=pygame.time.Clock()
+
+#Starting position of the rectangle
+start_x=50
+start_y=50
+
+#Speed and direction of the rectangle
+speed_x=2
+speed_y=2
+
+while not done:
+    for event in pygame.event.get():
+        if event.type==pygame.QUIT:
+            done=True
+
+    #Move the rectangle
+    start_x = start_x + speed_x
+    start_y = start_y + speed_y
+
+    #Bounce the ball if it touch the edge
+    if start_x>650 or start_x<0:
+        speed_x = speed_x *-1
+    if start_y>450 or start_y<0:
+        speed_y = speed_y *-1
+    #set the screen background
+    screen.fill(Black)
+
+    pygame.draw.rect(screen,White,[start_x,start_y,50,50])
+    #Limit to 60 frames per second
+    clock.tick(60)
+    #Go ahead and update the screen with what we have done so far
+    pygame.display.flip()
+
+pygame.quit()
